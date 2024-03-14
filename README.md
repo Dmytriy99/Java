@@ -18,11 +18,16 @@ Per verificare la giusta installazione e versione di Maven eseguire il seguente 
 ### Clonare il Repository
 Puoi clonare il repository eseguendo il seguente comando:
 
-``
+`git clone https://github.com/Dmytriy99/Java.git`
 
-## Code scaffolding
+## Eseguire l'applicazione
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Una volta clonato il progetto eseguire il seguente comando: 
+`mvn clean package`
+Eseguendo questo comando verranno compilati tutti i file nella cartella "target" e verrà creato il file .jar
+2. Lanciare l'applicazione
+Per lanciare l'applicazione attraverso il file .jar appena generato all'interno della cartella "target" eseguire il seguente comando:
+`java -jar target/NOME-DEL-JAR.jar`
 
 ## Build
 
