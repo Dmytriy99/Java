@@ -1,26 +1,25 @@
-package main.service;
+package org.javabasics.service;
 
 import java.util.Scanner;
 
-import main.model.Reservation;
-import main.model.Trip;
-import main.Main;
+import org.javabasics.model.Reservation;
 
-public class cancelReservationService {
+import org.javabasics.Main;
+import org.javabasics.model.Trip;
+import org.javabasics.utils.Finder;
+
+public class ReservationService {
     public static void cancelReservation(Scanner scanner) {
         System.out.println("Inserisci l'ID della prenotazione che vuoi disdire:");
         int reservationId = scanner.nextInt();
-        Reservation reservationToRemove = find.findReservationById(reservationId);
+        Reservation reservationToRemove = Finder.findReservationById(reservationId);
         if (reservationToRemove == null) {
             System.out.println("Prenotazione non trovata.");
             return;
         }
-        Trip reservedTrip = find.findTripById(reservationToRemove.getTripId());
+        Trip reservedTrip = Finder.findTripById(reservationToRemove.getTripId());
         if (reservedTrip != null) {
-            System.out.println("Viaggio trovato con ID: " + reservedTrip.getId());
-            System.out.println("Stato del viaggio prima dell'aggiornamento: " + reservedTrip.isAvailable());
             reservedTrip.setAvailable(true);
-            System.out.println("Stato del viaggio dopo l'aggiornamento: " + reservedTrip.isAvailable());
             Main.reservations.remove(reservationToRemove);
             System.out.println("Prenotazione disdetta correttamente.");
         } else {

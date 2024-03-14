@@ -1,16 +1,16 @@
-package main.service;
+package org.javabasics.utils;
 
-import main.model.Reservation;
-import main.model.Trip;
-import main.model.User;
-import main.Main;
+import org.javabasics.model.Reservation;
 
-public class find {
+import org.javabasics.Main;
+import org.javabasics.model.Trip;
+import org.javabasics.model.User;
+
+public class Finder {
 
     public static Trip findTripById(int id) {
         for (Trip trip : Main.trips) {
             if (trip.getId() == id) {
-                System.out.println(id);
                 return trip;
             }
         }

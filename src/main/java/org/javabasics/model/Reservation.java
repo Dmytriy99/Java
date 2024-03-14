@@ -1,4 +1,4 @@
-package main.model;
+package org.javabasics.model;
 
 public class Reservation {
     private int id;
@@ -22,10 +22,6 @@ public class Reservation {
     public int getTripId() {
         return tripId;
     }
-
-    // public String getDate() {
-    // return date;
-    // }
 
     @Override
     public String toString() {

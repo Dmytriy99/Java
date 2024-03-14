@@ -1,30 +1,32 @@
-package main.service;
+package org.javabasics.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import main.Main;
-import main.model.Reservation;
-import main.model.Trip;
-import main.model.User;
+import org.javabasics.model.Reservation;
 
-public class dataLoadCSV {
+import org.javabasics.Main;
+import org.javabasics.model.Trip;
+import org.javabasics.model.User;
+
+public class CSVDataLoader {
     public static void loadCSVData() {
         try {
-            BufferedReader userReader = new BufferedReader(new FileReader("src/main/data/utenti.csv"));
+            BufferedReader userReader = new BufferedReader(
+                    new FileReader("src/main/java/org/javabasics/data/utenti.csv"));
             String lineUser;
             boolean firstLine = true;
             while ((lineUser = userReader.readLine()) != null) {
                 if (firstLine) {
                     firstLine = false;
-                    continue; // Ignora la prima riga di intestazione
+                    continue;
                 }
                 String[] data = lineUser.split(";");
 
                 try {
                     int id = Integer.parseInt(data[0]);
-                    User user = new User(id, data[1], data[2]);
+                    User user = new User(id, data[1], data[2], data[3], data[4], data[5]);
                     Main.users.add(user);
                 } catch (NumberFormatException e) {
                     System.err.println("Errore durante il parsing dell'ID utente: " + lineUser);
@@ -34,21 +36,22 @@ public class dataLoadCSV {
             }
             userReader.close();
             // Carica viaggi
-            BufferedReader tripReader = new BufferedReader(new FileReader("src/main/data/viaggi.csv"));
+            BufferedReader tripReader = new BufferedReader(
+                    new FileReader("src/main/java/org/javabasics/data/viaggi.csv"));
             String line;
             while ((line = tripReader.readLine()) != null) {
-                // Ignora le righe vuote o con dati non validi
+
                 if (line.trim().isEmpty() || line.startsWith("?ID")) {
                     continue;
                 }
                 String[] data = line.split(";");
-                // Ignora le righe con un numero insufficiente di campi
+
                 if (data.length < 4) {
                     System.err.println("Riga viaggio non valida: " + line);
                     continue;
                 }
                 try {
-                    // Rimuovi caratteri non numerici dall'ID del viaggio
+
                     String idString = data[0].replaceAll("[^0-9]", "");
                     if (!idString.isEmpty()) {
                         int id = Integer.parseInt(idString);
@@ -66,32 +69,22 @@ public class dataLoadCSV {
                 }
             }
             tripReader.close();
-            BufferedReader reservationReader = new BufferedReader(new FileReader("src/main/data/prenotazioni.csv"));
+            BufferedReader reservationReader = new BufferedReader(
+                    new FileReader("src/main/java/org/javabasics/data/prenotazioni.csv"));
             String lineReservation;
             boolean firstLineReservation = true; // Aggiunto per ignorare la prima riga
             while ((lineReservation = reservationReader.readLine()) != null) {
                 if (firstLineReservation) {
                     firstLineReservation = false;
-                    continue; // Ignora la prima riga di intestazione
+                    continue;
                 }
-
                 String[] data = lineReservation.split(";");
-                // if (data.length < 4) {
-                // System.err.println(
-                // "Errore durante il parsing della prenotazione: la riga non ha abbastanza
-                // elementi");
-                // System.err.println("Riga: " + lineReservation);
-                // continue;
-                // }
-
                 try {
                     int id = Integer.parseInt(data[0]);
                     int userId = Integer.parseInt(data[1]);
                     int bookId = Integer.parseInt(data[2]);
-                    // String date = data[3];
                     Reservation reservation = new Reservation(id, userId, bookId);
                     Main.reservations.add(reservation);
-                    // System.out.println(reservation); // Stampiamo per debug
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     System.err.println("Errore durante il parsing della prenotazione: " + lineReservation);
                     e.printStackTrace();

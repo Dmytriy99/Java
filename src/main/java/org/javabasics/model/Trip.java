@@ -1,4 +1,4 @@
-package main.model;
+package org.javabasics.model;
 
 public class Trip {
     private int id;
@@ -15,7 +15,7 @@ public class Trip {
         this.start = start;
         this.arrive = arrive;
 
-        this.available = true; // Viaggio disponibile di default
+        this.available = true;
     }
 
     public int getId() {
@@ -48,7 +48,7 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Data: " + date + ",Durata volo" + timeTrip + ", Partenza: " + start + ", Arrivo: "
+        return "ID: " + id + ", Data: " + date + ",Durata volo" + timeTrip + ",Partenza: " + start + ", Arrivo: "
                 + arrive + ", Disponibile: " + (available ? "SI" : "NO");
     }
 }
