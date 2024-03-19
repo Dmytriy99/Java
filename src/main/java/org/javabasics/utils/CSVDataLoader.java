@@ -1,8 +1,9 @@
 package org.javabasics.utils;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.javabasics.model.Reservation;
 
@@ -13,8 +14,8 @@ import org.javabasics.model.User;
 public class CSVDataLoader {
     public static void loadCSVData() {
         try {
-            BufferedReader userReader = new BufferedReader(
-                    new FileReader("src/main/java/org/javabasics/data/utenti.csv"));
+            InputStream userStream = Main.class.getResourceAsStream("/data/utenti.csv");
+            BufferedReader userReader = new BufferedReader(new InputStreamReader(userStream, "UTF-8"));
             String lineUser;
             boolean firstLine = true;
             while ((lineUser = userReader.readLine()) != null) {
@@ -36,8 +37,8 @@ public class CSVDataLoader {
             }
             userReader.close();
             // Carica viaggi
-            BufferedReader tripReader = new BufferedReader(
-                    new FileReader("src/main/java/org/javabasics/data/viaggi.csv"));
+            InputStream tripStream = Main.class.getResourceAsStream("/data/viaggi.csv");
+            BufferedReader tripReader = new BufferedReader(new InputStreamReader(tripStream, "UTF-8"));
             String line;
             while ((line = tripReader.readLine()) != null) {
 
@@ -69,8 +70,8 @@ public class CSVDataLoader {
                 }
             }
             tripReader.close();
-            BufferedReader reservationReader = new BufferedReader(
-                    new FileReader("src/main/java/org/javabasics/data/prenotazioni.csv"));
+            InputStream reservationStream = Main.class.getResourceAsStream("/data/prenotazioni.csv");
+            BufferedReader reservationReader = new BufferedReader(new InputStreamReader(reservationStream, "UTF-16"));
             String lineReservation;
             boolean firstLineReservation = true; // Aggiunto per ignorare la prima riga
             while ((lineReservation = reservationReader.readLine()) != null) {
