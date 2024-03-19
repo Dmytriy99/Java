@@ -1,6 +1,10 @@
 # Travel
-In questa applicazione Java è possibile tramite appositi tasti  [1]visuallizare tutte le attività,[2]prenotare un'attività,[3] disdire una prenotazione,
-[4]aggiungere un nuovo utente,[5] esportare generenado un file le attività ancora disponibili e in fino [0] terminare il programma
+In questa applicazione Java è possibile tramite appositi tasti  
+[1]visuallizare tutte le attività,
+[2]prenotare un'attività,
+[3] disdire una prenotazione,
+[4]aggiungere un nuovo utente,
+[5] esportare generenado un file le attività ancora disponibili e in fino [0] terminare il programma
 
 ## Requisiti
 [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/).
