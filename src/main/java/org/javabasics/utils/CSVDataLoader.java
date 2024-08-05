@@ -47,10 +47,10 @@ public class CSVDataLoader {
                 }
                 String[] data = line.split(";");
 
-                if (data.length < 4) {
-                    System.err.println("Riga viaggio non valida: " + line);
-                    continue;
-                }
+                // if (data.length < 4) {
+                // System.err.println("Riga viaggio non valida: " + line);
+                // continue;
+                // }
                 try {
 
                     String idString = data[0].replaceAll("[^0-9]", "");
@@ -60,7 +60,8 @@ public class CSVDataLoader {
                         int timeTrip = Integer.parseInt(data[2]);
                         String start = data[3];
                         String arrive = data[4];
-                        boolean available = Boolean.parseBoolean(data[5]);
+                        // boolean available = Boolean.parseBoolean(data[5]);
+                        boolean available = true;
                         Trip trip = new Trip(id, date, timeTrip, start, arrive, available);
                         Main.trips.add(trip);
                     }
@@ -71,7 +72,7 @@ public class CSVDataLoader {
             }
             tripReader.close();
             InputStream reservationStream = Main.class.getResourceAsStream("/data/prenotazioni.csv");
-            BufferedReader reservationReader = new BufferedReader(new InputStreamReader(reservationStream, "UTF-16"));
+            BufferedReader reservationReader = new BufferedReader(new InputStreamReader(reservationStream, "UTF-8"));
             String lineReservation;
             boolean firstLineReservation = true; // Aggiunto per ignorare la prima riga
             while ((lineReservation = reservationReader.readLine()) != null) {
@@ -82,10 +83,14 @@ public class CSVDataLoader {
                 String[] data = lineReservation.split(";");
                 try {
                     int id = Integer.parseInt(data[0]);
-                    int userId = Integer.parseInt(data[1]);
-                    int bookId = Integer.parseInt(data[2]);
-                    Reservation reservation = new Reservation(id, userId, bookId);
+                    int bookId = Integer.parseInt(data[1]);
+                    int userId = Integer.parseInt(data[2]);
+                    Reservation reservation = new Reservation(id, bookId, userId);
                     Main.reservations.add(reservation);
+                    Trip trip = Finder.findTripById(bookId);
+                    if (trip != null) {
+                        trip.setAvailable(false);
+                    }
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     System.err.println("Errore durante il parsing della prenotazione: " + lineReservation);
                     e.printStackTrace();

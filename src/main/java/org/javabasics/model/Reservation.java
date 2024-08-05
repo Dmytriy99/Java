@@ -2,13 +2,13 @@ package org.javabasics.model;
 
 public class Reservation {
     private int id;
-    private int userId;
     private int tripId;
+    private int userId;
 
-    public Reservation(int id, int userId, int tripId) {
+    public Reservation(int id, int tripId, int userId) {
         this.id = id;
-        this.userId = userId;
         this.tripId = tripId;
+        this.userId = userId;
     }
 
     public int getId() {

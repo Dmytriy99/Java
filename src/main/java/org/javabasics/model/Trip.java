@@ -48,7 +48,7 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Data: " + date + ",Durata volo" + timeTrip + ",Partenza: " + start + ", Arrivo: "
+        return "ID: " + id + ", Data: " + date + ",Durata volo " + timeTrip + ",Partenza: " + start + ", Arrivo: "
                 + arrive + ", Disponibile: " + (available ? "SI" : "NO");
     }
 }

@@ -16,6 +16,12 @@ import org.javabasics.model.User;
 import org.javabasics.utils.Finder;
 
 public class TripService {
+    private static int nextReservationId = Main.reservations.size() + 1;
+
+    public static int getNextReservationId() {
+        return nextReservationId++;
+    }
+
     public static void displayTrips() {
         System.out.println("Lista dei viaggi:");
         for (Trip trip : Main.trips) {
@@ -46,8 +52,8 @@ public class TripService {
             System.out.println("Utente non trovato.");
             return;
         }
-        int reservationId = Main.reservations.size() + 1;
-        Reservation reservation = new Reservation(reservationId, userId, tripId);
+        int reservationId = getNextReservationId();
+        Reservation reservation = new Reservation(reservationId, tripId, userId);
         Main.reservations.add(reservation);
         trip.setAvailable(false);
         System.out.println(
