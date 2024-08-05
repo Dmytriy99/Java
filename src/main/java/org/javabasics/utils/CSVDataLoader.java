@@ -46,11 +46,6 @@ public class CSVDataLoader {
                     continue;
                 }
                 String[] data = line.split(";");
-
-                // if (data.length < 4) {
-                // System.err.println("Riga viaggio non valida: " + line);
-                // continue;
-                // }
                 try {
 
                     String idString = data[0].replaceAll("[^0-9]", "");
@@ -60,7 +55,6 @@ public class CSVDataLoader {
                         int timeTrip = Integer.parseInt(data[2]);
                         String start = data[3];
                         String arrive = data[4];
-                        // boolean available = Boolean.parseBoolean(data[5]);
                         boolean available = true;
                         Trip trip = new Trip(id, date, timeTrip, start, arrive, available);
                         Main.trips.add(trip);
