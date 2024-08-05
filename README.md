@@ -43,3 +43,7 @@ Puoi clonare il repository eseguendo il seguente comando:
 2. Lanciare l'applicazione
    Per lanciare l'applicazione attraverso il file .jar appena generato all'interno della cartella "target" eseguire il seguente comando:
    `java -jar target/NOME-DEL-JAR.jar`
+
+## Eseguire l'applicazione solo con il file `.JAR`
+
+Per lanciare l'applicazione utilizzando solo il file .jar eseguire il comando `java -jar NOME-DEL-FILE.jar`
