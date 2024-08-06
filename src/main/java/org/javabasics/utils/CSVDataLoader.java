@@ -40,25 +40,24 @@ public class CSVDataLoader {
             InputStream tripStream = Main.class.getResourceAsStream("/data/viaggi.csv");
             BufferedReader tripReader = new BufferedReader(new InputStreamReader(tripStream, "UTF-8"));
             String line;
+            boolean firstLineTrip = true;
             while ((line = tripReader.readLine()) != null) {
-
-                if (line.trim().isEmpty() || line.startsWith("?ID")) {
+                if (firstLineTrip) {
+                    firstLineTrip = false;
                     continue;
                 }
+
                 String[] data = line.split(";");
                 try {
+                    int id = Integer.parseInt(data[0]);
+                    String date = data[1];
+                    int timeTrip = Integer.parseInt(data[2]);
+                    String start = data[3];
+                    String arrive = data[4];
+                    boolean available = true;
+                    Trip trip = new Trip(id, date, timeTrip, start, arrive, available);
+                    Main.trips.add(trip);
 
-                    String idString = data[0].replaceAll("[^0-9]", "");
-                    if (!idString.isEmpty()) {
-                        int id = Integer.parseInt(idString);
-                        String date = data[1];
-                        int timeTrip = Integer.parseInt(data[2]);
-                        String start = data[3];
-                        String arrive = data[4];
-                        boolean available = true;
-                        Trip trip = new Trip(id, date, timeTrip, start, arrive, available);
-                        Main.trips.add(trip);
-                    }
                 } catch (NumberFormatException e) {
                     System.err.println("Errore durante il parsing dell'ID viaggio: " + line);
                     e.printStackTrace();
